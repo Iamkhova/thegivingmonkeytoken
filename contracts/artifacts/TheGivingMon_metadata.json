@@ -265,7 +265,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TheGivingMonkeyToken.sol": "Token"
+			"contracts/TheGivingMonkeyToken.sol": "TheGivingMon"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -280,11 +280,11 @@
 	},
 	"sources": {
 		"contracts/TheGivingMonkeyToken.sol": {
-			"keccak256": "0x4b13e8dad711d29a9c1a4ba373388bed83b821ae118b86d732e85b7373a2e1ad",
+			"keccak256": "0x00a933985c48bb46f1fcc2b5df76d7048ea519c1afda1b2a7218d0b1a4e5b294",
 			"license": "Unlicensed",
 			"urls": [
-				"bzz-raw://e6b16edda903c12af3d12a4fc39d9546b8fd85bae94ff246d45adc02e93d53f5",
-				"dweb:/ipfs/QmdaXvBpNxqtRAAuf2DofTQ3YHo2d4tVBPDEfRQQiTHRyQ"
+				"bzz-raw://693689bb77b9d9f743169e85af0b50ecca3f337cee10246fdf942e0a87f9066b",
+				"dweb:/ipfs/QmRqhLpXbE1ewWFTJBXkasmhvj1g56yAh9XGXrFmao2Fx1"
 			]
 		},
 		"contracts/interfaces/IERC20Interface.sol": {

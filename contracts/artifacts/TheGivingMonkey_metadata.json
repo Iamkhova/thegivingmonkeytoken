@@ -41,6 +41,25 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "from",
 						"type": "address"
 					},
@@ -64,12 +83,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "owner",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "spender",
 						"type": "address"
 					}
 				],
@@ -128,32 +147,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "balances",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "decimals",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint8",
 						"name": "",
-						"type": "uint256"
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -170,6 +170,26 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -250,11 +270,40 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"allowance(address,address)": {
+					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"totalSupply()": {
+					"details": "Returns the amount of tokens in existence."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -265,7 +314,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TheGivingMonkeyToken.sol": "Token"
+			"contracts/TheGivingMonkeyToken.sol": "TheGivingMonkey"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -280,11 +329,19 @@
 	},
 	"sources": {
 		"contracts/TheGivingMonkeyToken.sol": {
-			"keccak256": "0x4b13e8dad711d29a9c1a4ba373388bed83b821ae118b86d732e85b7373a2e1ad",
+			"keccak256": "0x296fcbff99583d21b4bdddb47624b1c97f0c7583f57583ca99113a71dd8b4e59",
 			"license": "Unlicensed",
 			"urls": [
-				"bzz-raw://e6b16edda903c12af3d12a4fc39d9546b8fd85bae94ff246d45adc02e93d53f5",
-				"dweb:/ipfs/QmdaXvBpNxqtRAAuf2DofTQ3YHo2d4tVBPDEfRQQiTHRyQ"
+				"bzz-raw://1b19598ce02a97772ee7a40103a88510d726362c381fd471c9de2e3e7f284800",
+				"dweb:/ipfs/QmZf7GtHbrS6tRAUxsTpNCwB5TpBVMrmqb8dKNKTR7aMP3"
+			]
+		},
+		"contracts/access/Ownable.sol": {
+			"keccak256": "0x048b816ecf707b41db9a375751f6c5b8b28b2fee047e376d5659d6bd3fbbbbcf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8e22d1076e0f1962ad06434d9fad9433ad53eacb3e65165b6166006cb635eca5",
+				"dweb:/ipfs/QmcgfbQrtcgAF5yhbMaweS3Y2kQdLSJKdqPwwin4JCEAfX"
 			]
 		},
 		"contracts/interfaces/IERC20Interface.sol": {
@@ -295,12 +352,28 @@
 				"dweb:/ipfs/QmZYU6FVM1nZqzEgeb6j5Nik3yNz5cJuWTHKxgtsBMVjAE"
 			]
 		},
-		"contracts/lib/SafeMathLibrary.sol": {
-			"keccak256": "0xb43c1dc30cadfc654f2848ede4b9993ff1dba8454fd1101b03b5f5a12bef6687",
-			"license": "Unlicensed",
+		"contracts/lib/AddressLibrary.sol": {
+			"keccak256": "0xe57c68ef15a800ed8276055bfa234fb62c4939afee71e63baa35f19b2586edfd",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://f160f08020a7051e8b32dc962a2f0364c78b65eb06ed5dd4a8ef832548300575",
-				"dweb:/ipfs/QmNe59Ln5xU69yKg9ei6i3kMvJMijCUB5veqd4QaCnrYZD"
+				"bzz-raw://0e988cf63a930e07ad1b55c109347b588dfbd28bd79f23e8f7162901d8f276b5",
+				"dweb:/ipfs/QmZd4D7me8qDHWXhm4NKYFjzQ4bGcC8b4WhPr9B4Rsv6jv"
+			]
+		},
+		"contracts/lib/SafeMathLibrary.sol": {
+			"keccak256": "0x8ca6870bea5eb6f7dae440f927ba9ec9a98da21bab9c3ce984021a959efa3852",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://778b218b0e19414b80d9f5b93d78249ad9e6b06846ef40a1bec3e3528f6659c3",
+				"dweb:/ipfs/QmNutPC5kg4W8HnzXVpJ2KS5ykqQCi75MAtr4XJpE7ugE8"
+			]
+		},
+		"contracts/utils/Context.sol": {
+			"keccak256": "0x2c36c9489879b7c91cdd73bbe8b2584f401aa26f4f252c04f053e824d6ca75c6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3ef20575fc12fd27f252acd28a8d0f65893832f29fd9c82f7ec165121af4572f",
+				"dweb:/ipfs/QmZMCoWWDTjhs1CNFMWv4JNWVyyeuzyqteCHhF4heCUYJJ"
 			]
 		}
 	},

@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -64,12 +59,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "owner",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "spender",
 						"type": "address"
 					}
 				],
@@ -93,7 +88,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "value",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
@@ -112,7 +107,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "account",
 						"type": "address"
 					}
 				],
@@ -122,64 +117,6 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "balances",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "decimals",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "symbol",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -202,12 +139,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "to",
+						"name": "recipient",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "value",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
@@ -226,17 +163,17 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "from",
+						"name": "sender",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "to",
+						"name": "recipient",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "value",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
@@ -253,8 +190,35 @@
 			}
 		],
 		"devdoc": {
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
+				},
+				"Transfer(address,address,uint256)": {
+					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
+				}
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"allowance(address,address)": {
+					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+				},
+				"approve(address,uint256)": {
+					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
+				},
+				"balanceOf(address)": {
+					"details": "Returns the amount of tokens owned by `account`."
+				},
+				"totalSupply()": {
+					"details": "Returns the amount of tokens in existence."
+				},
+				"transfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -265,7 +229,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TheGivingMonkeyToken.sol": "Token"
+			"contracts/IERC20Interface.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -279,28 +243,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TheGivingMonkeyToken.sol": {
-			"keccak256": "0x4b13e8dad711d29a9c1a4ba373388bed83b821ae118b86d732e85b7373a2e1ad",
-			"license": "Unlicensed",
-			"urls": [
-				"bzz-raw://e6b16edda903c12af3d12a4fc39d9546b8fd85bae94ff246d45adc02e93d53f5",
-				"dweb:/ipfs/QmdaXvBpNxqtRAAuf2DofTQ3YHo2d4tVBPDEfRQQiTHRyQ"
-			]
-		},
-		"contracts/interfaces/IERC20Interface.sol": {
+		"contracts/IERC20Interface.sol": {
 			"keccak256": "0x24d8fdded8b24e718babab89befa1ae9c6a2b07b917f59de1f810ff1a442f576",
 			"license": "Unlicensed",
 			"urls": [
 				"bzz-raw://6879a55213c7976cee14694de2dd1839f6fc1545cd33c6664f5e181d2e17aea6",
 				"dweb:/ipfs/QmZYU6FVM1nZqzEgeb6j5Nik3yNz5cJuWTHKxgtsBMVjAE"
-			]
-		},
-		"contracts/lib/SafeMathLibrary.sol": {
-			"keccak256": "0xb43c1dc30cadfc654f2848ede4b9993ff1dba8454fd1101b03b5f5a12bef6687",
-			"license": "Unlicensed",
-			"urls": [
-				"bzz-raw://f160f08020a7051e8b32dc962a2f0364c78b65eb06ed5dd4a8ef832548300575",
-				"dweb:/ipfs/QmNe59Ln5xU69yKg9ei6i3kMvJMijCUB5veqd4QaCnrYZD"
 			]
 		}
 	},
